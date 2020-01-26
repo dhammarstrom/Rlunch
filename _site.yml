@@ -1,0 +1,9 @@
+name: "R-lunch"
+output_dir: "docs"
+navbar:
+  title: "R lunch @ the Department of Sport Science, INN"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
