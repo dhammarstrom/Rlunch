@@ -1,0 +1,31 @@
+---
+title: "Version control with GitHub, reproducible reporting and collaboration"
+author: "Daniel Hammarström"
+date: "2020-01-28"
+output: html_document
+---
+
+# Why version control
+
+Version control can help you track changes in your entire analysis project. This is helpful when multiple files make up a complex project, including e.g. scripts, data and manuscript files. It is also helpful when multiple collaborators work together (e.g. writing a paper). You will, by using version control, avoid overwriting other peoples work. With multiple changes made to the project, *merging* will create the latest up-to-date version. When you change a file in your analysis you will required to describe the changes you have made, Git in turn, creates a record of your change. This also means that we have "backups" of previous versions.
+
+# A simple/complicated start
+
+I use version control when working in R by setting up **repositories** on www.github.com and then **cloning** to my local computer. A **repository** is a folder containing all the files in a specified project. Using **projects** in RStudio makes it easy to sync local projects with the online version control.
+
+When **cloning** a project, you download all files to your personal computer, you are then free to work on the project without interference from others. When you have created a new file you **add** the file to version control and **commits** the changes. This means that your change has got a unique identity in the history of your project. You may now **push** changes to the online repository which is the online version of your work. 
+
+When collaborating with others, **pull requests** makes it easy for others to make changes to your repository that you have to accept or decline. This is somewhat equivalent to suggesting a change in a word document with track changes activated. 
+
+# Resources
+
+- [Hadley Wickham has written about using Git and GitHub when constructing R packages](http://r-pkgs.had.co.nz/git.html). This is a useful guide also for other workflows involving R and Git.
+- [Extensive resources can be found on Happy Git and GitHub for the useR](https://happygitwithr.com/)
+- [Karl Broman provides a "minimal tutorial"](https://happygitwithr.com/)
+
+# Writing scientific papers with R, RStudio, GitHub - Something for us?
+
+Collaborating on writing a paper is hard. You send a file, get another one in return. Some files are on dropbox, some are lost. What if we had a system for collaborati 
+
+
+
