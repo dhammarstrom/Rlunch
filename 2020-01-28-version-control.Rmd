@@ -27,6 +27,7 @@ When collaborating with others, **pull requests** makes it easy for others to ma
 - [Hadley Wickham has written about using Git and GitHub when constructing R packages](http://r-pkgs.had.co.nz/git.html). This is a useful guide also for other workflows involving R and Git.
 - [Extensive resources can be found on Happy Git and GitHub for the useR](https://happygitwithr.com/)
 - [Karl Broman provides a "minimal tutorial"](https://happygitwithr.com/)
+- [GitHub hosts resources for learning Git](https://try.github.io/)
 
 
 
