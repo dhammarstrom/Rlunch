@@ -2,4 +2,4 @@
 title: "R lunch"
 ---
 
-2020-01-28: Version control with Github, reproducible reporting and collaboration.
+2020-01-28: [Version control with Github, reproducible reporting and collaboration.](2020-01-28-version-control.html)
