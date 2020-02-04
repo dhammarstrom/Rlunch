@@ -1,0 +1,199 @@
+---
+title: "Making tables"
+author: "Daniel Hammarström"
+date: "2020-02-04"
+output: html_document
+---
+
+R can aid in creating nice tables that need virtually no formatting post-scripting (i.e. after you have worked out how the hell to do it in the first place). 
+
+This R lunch will focus on making tables with `kable` from the `knitr` package and the `kableExtra` package used to extend `kable`. 
+
+## Resources
+The `kable` function is described in a newly developed book, available online called [the R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html). The package, `kableExtra` comes with excellent [vignettes](https://cran.r-project.org/web/packages/kableExtra/) for both html and pdf outputs. 
+
+## Limitations and alternatives
+
+When using R-Markdown, we can create reports in three formats: pdf, html and word. Unfortunately, `kable`/`kableExtra` is not possible to use with word-files. To circumvent this issue, the author may have to do some copy-paste from a html file into a word file if this is the desired file format. This is un-problematic (except for the non reproducible operation of copy-paste).
+
+Many alternatives exists to `kable`/`kableExtra` for making tables in R based on data. `xtable`, `formattable` and `stargazer` are some 
+
+## Why `kable`/`kableExtra`?
+- The syntax is easily incorporated with `dplyr`/`tidyr` pipes.
+- `kable` offers a quick way to produce simple tables, `kableExtra` can help creating advanced tables.
+
+## Examples 
+
+In this example we will produce a "participant characteristics table". This is a common "Table 1" in many reports.
+
+### Prerequisistes
+
+Load packages with the following commands:
+
+```{r load_packages, eval = FALSE}
+library(tidyverse) # for data wrangling and file download
+library(knitr) # for the kable function
+library(kableExtra) # for extended capabilities
+```
+
+Download the example file with the following command:
+
+```{r download_data, eval=FALSE, message=TRUE, warning=TRUE}
+library(tidyverse)
+
+download.file("https://www.dropbox.com/s/g2t97j8edqvvktn/tr003_dxa.csv?raw=1", 
+              destfile = "dxa_data.csv")
+
+dxa_data <- read_csv("dxa_data.csv")
+
+```
+
+## First steps, decide what data to use and summarise
+
+Before we can start to format the table, we need to decide what data to put in it. The goal here is to create a summary table of participant characteristics. We can group the participants based on inclusion/exclusion from the study and sex.
+
+Above, we stored the data in an object called `dxa_data`. Use the below code to see what it contains.
+
+```{r data exploration1, eval = FALSE}
+dxa_data %>%
+        print()
+```
+
+This is data from iDXA measurements that also contains weight, height, age, sex and if participants were included in the data analysis or not (`include == "incl"` or `include == "excl"`). First we want to use  lean body mass as a percentage of the whole body mass as a measure to describe the participants. The below code does the calculation. We also select columns of interest for further data preparations. Store in a new object, so that the raw data can be used later. 
+
+```{r calculate_LBM, eval = FALSE}
+
+dxa <- dxa_data %>%
+        rowwise() %>%
+        mutate(LBM = (lean.whole / (fat.whole + BMD.whole + lean.whole)) * 100) %>%
+        select(subject, age, height, weight, LBM, sex, include) %>%
+        print()
+
+```
+Using `dplyr::group:by()` and `dplyr::summarise()` we can now create a summary table.
+
+```{r data summary, eval = FALSE}
+
+dxa %>%
+        ungroup() %>%
+        group_by(sex, include) %>%
+        summarise(m.age = mean(age), 
+                  s.age = sd(age), 
+                  m.height = mean(height), 
+                  s.height = sd(height), 
+                  m.weight = mean(weight), 
+                  s.weight = sd(weight), 
+                  m.lbm = mean(LBM), 
+                  s.lbm =sd(LBM)) %>%
+        print()
+
+```
+This was somewhat inefficient. We can add a line and calculate per variable.
+
+```{r data summary2, eval = FALSE}
+
+summary_table <- dxa %>%
+        ungroup() %>%
+        pivot_longer(cols = age:LBM, names_to = "variable", values_to = "value") %>%
+        group_by(sex, include, variable) %>%
+        summarise(m = mean(value), 
+                  s = sd(value)) %>%
+        print()
+
+```
+
+This was more efficient! But it's not formatted to be a table just yet. Of course there are many ways to create this table. But first, we can format the numbers to make nice presentations. For simplicity, lets say that all numbers will be printed with a single digit. We could use `round(x, 1)` but this will in some cases produce a number without trailing zero. Instead we will use `sprintf("%.1f", x)` where x is the number of interest. We will also combine mean and standard deviation to a single cell using the `paste0()` function. `paste0()` combines numbers and text into a character string, this means they will lose some information but that is ok.
+
+```{r data summary3, eval = FALSE}
+
+summary_table <- dxa %>%
+        ungroup() %>%
+        pivot_longer(cols = age:LBM, names_to = "variable", values_to = "value") %>%
+        group_by(sex, include, variable) %>%
+        summarise(m = mean(value), 
+                  s = sd(value)) %>%
+        ungroup() %>%
+        mutate(summary = paste0(sprintf("%.1f", m),
+                                " (",
+                                sprintf("%.1f", s), 
+                                ")")) %>%
+        select(sex, include, variable, summary) %>%
+        pivot_wider(id_cols = variable, names_from = c(sex, include), values_from = summary ) %>%
+        print()
+
+```
+
+The summary table is ready for making a table. In R Markdown chunk settings, we need to set the output format to `results = "asis"`. This will print the table correctly. To create the table, all we need to do is to is to pipe it to `kable()`.   
+
+
+````
+`r ''````{r my_table, results="asis"}
+summary_table %>%
+        kable(format = "html", col.names = c("Variable", 
+                                                "Female excluded",
+                                                "Female included", 
+                                                "Male excluded", 
+                                                "Male included"), 
+                                        caption = "Participant characteristics")
+
+```
+````
+
+We might want to extend the table and make it a bit, this is where `kableExtra` comes in. Lets say that we want to include a row above Female/Male and an only print this information once. After the `kable()` command, we use commands from the `kableExtra` package.  
+
+
+
+```{r kableExtra,  eval = FALSE}
+
+summary_table %>%
+        kable(format = "html", col.names = c(" ", 
+                                                "Excluded",
+                                                "Included", 
+                                                "Excluded", 
+                                                "Included"), 
+                                        caption = "Participant characteristics") %>%
+                                        add_header_above(c(" " = 1, "Female" = 2, "Male" = 2))
+
+
+```
+
+There is still some work to do here, variable names should be with a capital letter, this is most easily done in data preparation stages. An example of the whole pipe could be:
+
+```{r mytable_cont, eval = FALSE}
+
+dxa %>%
+        ungroup() %>%
+        pivot_longer(cols = age:LBM, names_to = "variable", values_to = "value") %>%
+        group_by(sex, include, variable) %>%
+        summarise(m = mean(value), 
+                  s = sd(value)) %>%
+        ungroup() %>%
+        mutate(summary = paste0(sprintf("%.1f", m),
+                                " (",
+                                sprintf("%.1f", s), 
+                                ")")) %>%
+        select(sex, include, variable, summary) %>%
+        pivot_wider(id_cols = variable, names_from = c(sex, include), values_from = summary ) %>%
+        # sort the rows -- create a factor level
+        mutate(variable = factor(variable, levels = c("age", "height", "weight", "LBM"))) %>%
+        arrange(variable) %>%
+        mutate(Variable = c("Age (yrs)", "Stature (cm)", "Body mass (kg)", "Lean body mass (%)")) %>%
+        select(Variable, female_excl:male_incl) %>%
+        kable(format = "html", col.names = c(" ", 
+                                                "Excluded",
+                                                "Included", 
+                                                "Excluded", 
+                                                "Included"), 
+                                        caption = "Table 1. Participant characteristics") %>%
+                                        add_header_above(c(" " = 1, "Female" = 2, "Male" = 2)) %>%
+                                        footnote(general = "Values are Mean (SD)")
+
+
+```
+
+## Final thoughts
+
+The [vignette describining the kableExtra package](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) is highly recommended! If you want to extend to pdf-tables (which are really nice!). Use the $\LaTeX$ vignette found [here](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_pdf.pdf). When creating pdf/$\LaTeX$ tables/reports some basic understandning of $\LaTeX$ is good. 
+
+
+
