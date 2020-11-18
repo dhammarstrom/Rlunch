@@ -11,10 +11,10 @@
 
 <meta name="author" content="Daniel Hammarström" />
 
-<meta name="date" content="2020-01-28" />
 
 <title>Synopsis: Version control with GitHub, reproducible reporting and collaboration in data analysis</title>
 
+<script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -24,6 +24,15 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -293,31 +302,31 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Synopsis: Version control with GitHub, reproducible reporting and collaboration in data analysis</h1>
 <h4 class="author">Daniel Hammarström</h4>
-<h4 class="date">2020-01-28</h4>
+<h4 class="date">Updated 2020-11-17</h4>
 
 </div>
 
 
-<div id="writing-scientific-papers-with-r-rstudio-github---something-for-us" class="section level1">
-<h1>Writing scientific papers with R, RStudio, GitHub - Something for us?</h1>
+<div id="writing-scientific-papers-with-r-rstudio-github---something-for-us" class="section level2">
+<h2>Writing scientific papers with R, RStudio, GitHub - Something for us?</h2>
 <p>Collaborating on writing a paper is hard. You send a file, get another one in return. Some files are on dropbox, some are lost. What if we had a system for collaboration that made it easy to follow the progress of of a project. Connecting R projects to git and GitHub makes this possible, this R-lunch discusses the use of R/GitHub when collaborating on research projects.</p>
 </div>
-<div id="why-version-control" class="section level1">
-<h1>Why version control</h1>
+<div id="why-version-control" class="section level2">
+<h2>Why version control</h2>
 <p>Version control can help you track changes in your entire analysis project. This is helpful when multiple files make up a complex project, including e.g. scripts, data and manuscript files. It is also helpful when multiple collaborators work together (e.g. writing a paper). You will, by using version control, avoid overwriting other peoples work. With multiple changes made to the project, <strong>merging</strong> will create the latest up-to-date version. When you change a file in your analysis you will required to describe the changes you have made, Git in turn, creates a record of your change. This also means that we have “backups” of previous versions.</p>
 </div>
-<div id="a-simplecomplicated-start" class="section level1">
-<h1>A simple/complicated start</h1>
+<div id="a-simplecomplicated-start" class="section level2">
+<h2>A simple/complicated start</h2>
 <p>I use version control when working in R by setting up <strong>repositories</strong> on www.github.com and then <strong>cloning</strong> to my local computer. A <strong>repository</strong> is a folder containing all the files in a specific project. Using <strong>projects</strong> in RStudio makes it easy to sync local projects with the online version control.</p>
 <p>When <strong>cloning</strong> a project, you download all files to your personal computer, you are then free to work on the project without interference from others. When you have created a new file you <strong>add</strong> the file to version control and <strong>commits</strong> the changes. This means that your change has got a unique identity in the history of your project. You may now <strong>push</strong> changes to the online repository which is the online version of your work.</p>
 <p>When collaborating with others, <strong>pull requests</strong> makes it easy for others to make changes to your repository that you have to accept or decline. This is somewhat equivalent to suggesting a change in a word document with track changes activated.</p>
 </div>
-<div id="resources" class="section level1">
-<h1>Resources</h1>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
 <ul>
 <li><a href="http://r-pkgs.had.co.nz/git.html">Hadley Wickham has written about using Git and GitHub when constructing R packages</a>. This is a useful guide also for other workflows involving R and Git.</li>
 <li><a href="https://happygitwithr.com/">Extensive resources can be found on Happy Git and GitHub for the useR</a></li>
-<li><a href="https://happygitwithr.com/">Karl Broman provides a “minimal tutorial”</a></li>
+<li><a href="https://kbroman.org/github_tutorial//">Karl Broman provides a “minimal tutorial”</a></li>
 <li><a href="https://try.github.io/">GitHub hosts resources for learning Git</a></li>
 </ul>
 </div>

@@ -1,20 +1,20 @@
 ---
 title: "Synopsis: Version control with GitHub, reproducible reporting and collaboration in data analysis"
 author: "Daniel Hammarström"
-date: "2020-01-28"
+date: "Updated 2020-11-17"
 output: html_document
 ---
 
-# Writing scientific papers with R, RStudio, GitHub - Something for us?
+## Writing scientific papers with R, RStudio, GitHub - Something for us?
 
 Collaborating on writing a paper is hard. You send a file, get another one in return. Some files are on dropbox, some are lost. What if we had a system for collaboration that made it easy to follow the progress of of a project. Connecting R projects to git and GitHub makes this possible, this R-lunch discusses the use of R/GitHub when collaborating on research projects.
 
 
-# Why version control
+## Why version control
 
 Version control can help you track changes in your entire analysis project. This is helpful when multiple files make up a complex project, including e.g. scripts, data and manuscript files. It is also helpful when multiple collaborators work together (e.g. writing a paper). You will, by using version control, avoid overwriting other peoples work. With multiple changes made to the project, **merging** will create the latest up-to-date version. When you change a file in your analysis you will required to describe the changes you have made, Git in turn, creates a record of your change. This also means that we have "backups" of previous versions.
 
-# A simple/complicated start
+## A simple/complicated start
 
 I use version control when working in R by setting up **repositories** on www.github.com and then **cloning** to my local computer. A **repository** is a folder containing all the files in a specific project. Using **projects** in RStudio makes it easy to sync local projects with the online version control.
 
@@ -22,11 +22,11 @@ When **cloning** a project, you download all files to your personal computer, yo
 
 When collaborating with others, **pull requests** makes it easy for others to make changes to your repository that you have to accept or decline. This is somewhat equivalent to suggesting a change in a word document with track changes activated. 
 
-# Resources
+## Resources
 
 - [Hadley Wickham has written about using Git and GitHub when constructing R packages](http://r-pkgs.had.co.nz/git.html). This is a useful guide also for other workflows involving R and Git.
 - [Extensive resources can be found on Happy Git and GitHub for the useR](https://happygitwithr.com/)
-- [Karl Broman provides a "minimal tutorial"](https://happygitwithr.com/)
+- [Karl Broman provides a "minimal tutorial"](https://kbroman.org/github_tutorial//)
 - [GitHub hosts resources for learning Git](https://try.github.io/)
 
 

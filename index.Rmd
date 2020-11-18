@@ -2,6 +2,10 @@
 title: "R lunch"
 ---
 
+2020-11-17: [Slideshow for the seminar on reproducible science](presentations/2020-11-17-rlunch-git-excel.html)
+
+2020-11-17: [Version control with Github, reproducible reporting and collaboration.](2020-01-28-version-control.html) 
+
+
 2020-02-04: [Making tables](2020-02-04-making-tables.html)
 
-2020-01-28: [Version control with Github, reproducible reporting and collaboration.](2020-01-28-version-control.html)

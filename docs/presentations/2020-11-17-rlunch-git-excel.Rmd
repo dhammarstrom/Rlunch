@@ -1,0 +1,126 @@
+---
+title: "~~Statistics~~ Data analysis seminar"
+subtitle: "(sometimes known as RLunch)"
+author: "Daniel Hammarström"
+
+date: "(updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+<center>
+<img src="https://vickysteeves.gitlab.io/repro-papers/img/final-doc.jpg">
+</center>
+<font size="2">http://phdcomics.com/</font>
+---
+
+
+<center>
+<img src="https://scontent.fosl2-1.fna.fbcdn.net/v/t1.0-9/s960x960/56723875_1000367536833590_4003934294773858304_o.jpg?_nc_cat=110&ccb=2&_nc_sid=8024bb&_nc_ohc=XIX8Q5oj86MAX8d71t5&_nc_ht=scontent.fosl2-1.fna&tp=7&oh=72050069213b7ba7c4b87fd89ee064d5&oe=5FDA3827" width="400">
+</center>
+
+<font size="2">@themiserablelifeofphd</font>
+
+---
+
+<center>
+<img src="https://scontent.fosl2-1.fna.fbcdn.net/v/t1.0-9/27332287_722808881256125_7125795946575453547_n.jpg?_nc_cat=101&ccb=2&_nc_sid=2d5d41&_nc_ohc=zP9fOWz3-zwAX-STEe8&_nc_ht=scontent.fosl2-1.fna&oh=342d53f69213d15c63317827c007a1ef&oe=5FD9512F" width="400">
+</center>
+<font size="2">@themiserablelifeofphd</font>
+
+---
+
+# Prepare for data analysis
+
+
+- Organize data in tables (excel- or csv-files)
+- Organize a repository (a single folder for all files)
+- Document you analysis (create readme-files)
+
+---
+
+# Organize data in files
+
+Store data in excel files, the definite guide:
+
+<br>
+
+Karl W. Broman & Kara H. Woo (2018) Data Organization in Spreadsheets, The American Statistician, 72:1, 2-10, DOI: 10.1080/00031305.2017.1375989
+
+---
+
+# Organize a folder for your project
+
+```
+data/
+derivedData/
+R/
+resources/
+figures/
+notes/
+
+
+readme.md (or readme.txt)
+manuscript.Rmd
+
+```
+---
+
+# Organize a folder for your project
+
+- Use a single folder for the whole project
+- Separate types of data (raw from processed)
+- Do not edit data (hence raw and processed data)
+- Use good file names! (no spaces, shorter names are easier to type)
+
+<br>
+
+<font size = "2">https://kbroman.org/steps2rr/</font>
+
+---
+
+# The single folder
+
+- A single folder is easier to back-up
+- It enables reproducible analysis
+- Enables collaboration
+- When using scripts, this enables relative paths
+
+---
+
+# Separate raw data from processed data
+
+- Any changes to data should be done in a separate file (or script)
+- To keep analyses reproducible, if possible do not change file names of raw data files.
+- Derived/processed data can be structured based on the script that created them
+
+---
+
+
+# File names
+
+<center>
+<img src="http://www.phdcomics.com/comics/archive/phd052810s.gif" width="500">
+</center>
+
+<br>
+<font size="2">http://phdcomics.com/</font>
+
+---
+
+# File names
+
+- File names should not contains spaces or crazy characters (. / *)
+- Underscores `_` or hyphen `-` is ok (example: `rna_conc_raw.csv`, or `rna-conc-raw.csv`)  
+- Keep short but descriptive, if descriptive is hard to accomplish, describe file names in a readme-file
+
+---
+
+# The README-file
+
+- Write this for yourself ... and for others
+- Describe the project to whomever will open your folder (sensor)
